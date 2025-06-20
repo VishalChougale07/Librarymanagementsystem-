@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 65%;
+            border-radius: 10px;
+            max-width: 1200px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .left, .right {
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .left {
+            flex: 1;
+        }
+        .left h2 {
+            color: #ff007f;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .left .contact-info {
+            margin-bottom: 20px;
+        }
+        .left .contact-info span {
+            display: block;
+            font-weight: bold;
+            color: #000;
+        }
+        .left .contact-info a {
+            color: black;
+            text-decoration: none;
+        }
+        .left .social-icons a {
+            margin-right: 10px;
+            color: #000;
+            font-size: 20px;
+        }
+        .right {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        .right input, .right textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background: transparent;
+            font-size: 16px;
+        }
+        .right input[type="submit"] {
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .right input[type="submit"]:hover {
+            background-color: blue;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+            .left, .right {
+                width: 50%;
+            }
+        }
+        @media (max-width: 767px) {
+            .video-background {
+                display: none;
+            }
+        }
+        #msg {
+            color: red;
+           
+            width: 60%;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+            padding: 10px 0px 0px 250px;
+            position: absolute;
+            z-index: 1;
+            margin-bottom: 515px;
+        }
+        .main{
+            margin: 50px 0px 0px 250px ;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the NavBar fragment -->
+<header th:replace="fragments/nav :: navbar"></header>
+  <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;">
+    <video class="video-background" autoplay muted loop style="width: 100vw; height: 100vh; object-fit: cover;">
+        <source src="/videos/vedio1px.mp4" type="video/mp4">
+    </video>
+</div>
+    <div class="main">
+        <div th:if="${status != null}" id="msg">
+            <h3 th:text="${status}"></h3>
+        </div>
+
+        <div class="container">
+            <div class="left">
+                <h2>REACH US</h2>
+                <div class="contact-info">
+                    <span>#816, 13th Cross Road, 23rd Main Rd, 2nd Phase, J. P. Nagar, Bengaluru, Karnataka 560078</span>
+                </div>
+                <h2>MAIL US</h2>
+                <div class="contact-info">
+                    <a href="mailto:fashionstore@gmail.com">bookstore@gmail.com</a>
+                </div>
+                <h2>CALL US</h2>
+                <div class="contact-info">
+                    <span>9741915615</span>
+                </div>
+                <h2>FOLLOW US</h2>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="iiamkiranpatil"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="right">
+                <video class="video-background" autoplay muted loop>
+                    <source src="vedio/vedio1px.mp4" type="video/mp4">
+                </video>
+                <h2 style="color: pink; text-decoration: underline;">Login here</h2>
+                <form action="/library/userlogin" id="signup" method="post">
+                    <input type="email" name="userEmail" placeholder="Enter your email">
+                    <input type="password" name="uPassword" placeholder="Enter your password">
+                    <input type="submit" value="Login" name="login" class="log">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

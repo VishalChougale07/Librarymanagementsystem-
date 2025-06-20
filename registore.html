@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
+    <style type="text/css">
+        .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the video covers the whole background area */
+      z-index: -1; /* Places the video behind the content */
+    }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 20px;">
+
+<header th:replace="~{fragments/nav :: navbar}"></header>
+
+
+<div style="max-width: 400px; margin: 26px 0px 0px 100px; background: transparent; font-size: larger; padding: 20px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);">
+    
+    
+
+    
+    <h2 style="margin: 8px 0px 30px 0px; text-align: center;">Registration Form</h2>
+    <!-- <div class="card-footer bg-info text-white" th:if="${message != null}">					
+		<h2 style="color: red;" th:text="${message}"></h2>
+		</div> -->
+		<div th:if="${message}" style="color: black; text-align: center;">
+    <h3 th:text="${message}"></h3>
+</div>
+		
+    <form th:action="@{/library/userRegister}" method="post">
+
+         
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="uName" required style="width: 94%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; background: transparent; color: black; border-radius: 5px;">
+        
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="uPhone" required style="width: 94%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; background: transparent; color: black; border-radius: 5px;">
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="userEmail" required style="width: 94%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; background: transparent; color: black; border-radius: 5px;">
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="uPassword" required style="width: 94%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; background: transparent; color: black; border-radius: 5px;">
+        
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required style="width: 94%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; background: transparent; color: black; border-radius: 5px;">
+        
+        <input type="submit" name="registration" value="Register" style="background-color: #5cb85c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%;">
+    </form>
+    
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;">
+    <video class="video-background" autoplay muted loop style="width: 100vw; height: 100vh; object-fit: cover;">
+        <source src="/videos/registor.mp4" type="video/mp4">
+    </video>
+</div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#signup").validate({
+            rules: {
+                uName: { required: true },
+                uPhone: { required: true, minlength: 10, maxlength: 10, digits: true },
+                userEmail: { required: true, email: true },
+                uPassword: { required: true, minlength: 4 },
+                confirm_password: { required: true, minlength: 4, equalTo: "#password" }
+            },
+            messages: {
+                uName: { required: "Please enter your name" },
+                uPhone: { required: "Please enter your phone number", minlength: "Must be 10 digits", maxlength: "Must be 10 digits", digits: "Enter a valid number" },
+                userEmail: { required: "Please enter your email" },
+                uPassword: { required: "Please enter your password", minlength: "At least 4 characters" },
+                confirm_password: { required: "Please confirm your password", equalTo: "Passwords do not match" }
+            },
+           /*  submitHandler: function (form) {
+                $.ajax({
+                    type: "POST",
+                    url: "/library/userRegister",
+                    data: $(form).serialize(), // Serialize form data
+                    dataType: "json",
+                    success: function (response) {
+                        alert(response.messages); // Display success message
+                        window.location.href = "/library/successPage"; // Redirect if needed
+                    },
+                    error: function (xhr) {
+                        alert("Error: " + xhr.responseText); // Show error message
+                    }
+                });
+            } */
+            
+        });
+    });
+    /* success: function (response) {
+        alert(response.messages); // Show success or error message
+
+        if (response.status === "success") {
+            window.location.href = "/library/login"; // Redirect after success
+        }
+    } */
+
+</script>
+
+
+</body>
+</html>

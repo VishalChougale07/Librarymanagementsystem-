@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="
+    font-family: 'Poppins', sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    width:100%;
+    box-sizing: border-box;">
+    
+
+    <header th:fragment="navbar" style=" display: flex; justify-content: space-between; align-items: center; padding: 15px 30px;">
+        <div class="logo" style="margin-left: 30px;">
+            <img alt="Library" src="ImgBasic/logo.png" style="height: 100px; width: auto;">
+        </div>
+        <div class="menu" style="display: flex; align-items: center; font-size: 20px;">
+            <!-- If user is logged in --> 
+            <div th:if="${uname != null && umail != 'admin@gmail.com'}">
+                <a href="/Book/home" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Home</a>
+                <a href="/Book/getallbooks" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s/* , transform 0.3s */;">Books</a>
+                <a href="/Book/allOrders" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color: white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s;">Your-orders</a>
+                <a href="#" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color: white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">About</a>
+                
+                <a href="/library/logout" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Logout</a>
+                <i class="fa fa-user-circle" id="logo" th:text="${uname}" style="padding-right: 5px; color:white;"></i>
+            </div>
+            <div th:if="${uname != null && umail == 'admin@gmail.com'}">
+             <a href="/Book/home" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Home</a>
+                <a href="/Book/getallbooks" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Books</a>
+               <a href="/Book/allOrders" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s;">Your-orders</a>
+               
+                <a href="#" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color: white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">About</a>
+                
+             <!-- <span th:if="${umail == 'admin@gmail.com'}"> -->
+                    |
+                    <a href="/Book/getEachBook" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">UnderUseBooks</a>
+                    <a href="/Book/addbooks" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Add/Delete</a>
+               <!--  </span> -->
+                <a href="/library/logout" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Logout</a>
+                <i class="fa fa-user-circle" id="logo" th:text="${uname}" style="padding-right: 5px; color: white"></i>
+            </div>
+
+            <!-- If user is not logged in -->
+            <div th:if="${uname == null}">
+                <a href="/Book/home" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Home</a>
+                <a href="/Book/getallbooks" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Books</a>
+                <a href="#" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color: #333; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">About</a>
+                <a href="/library/login" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Login</a>
+                <a href="/library/registor" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;">Register</a>
+                <a href="#" style="padding: 10px 15px; font-size: 16px; font-weight: 600; color:white; text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s, transform 0.3s;"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
